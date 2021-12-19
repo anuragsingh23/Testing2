@@ -2,9 +2,8 @@ package com.androiddevs.shoppinglisttestingyt.di
 
 import android.content.Context
 import androidx.room.Room
-import androidx.room.RoomDatabase
 import com.androiddevs.shoppinglisttestingyt.data.local.ShoppingItemDb
-import com.androiddevs.shoppinglisttestingyt.data.remote.PixaBay
+import com.androiddevs.shoppinglisttestingyt.data.remote.PixaBayApi
 import com.androiddevs.shoppinglisttestingyt.others.Constants.BASE_URL
 import com.androiddevs.shoppinglisttestingyt.others.Constants.DATABASE_NAME
 import dagger.Module
@@ -14,7 +13,6 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
 import javax.inject.Singleton
 
 
@@ -37,12 +35,12 @@ object AppModule {
 
     @Singleton
     @Provides
-    suspend fun providePixaBayApi() : PixaBay{
+    suspend fun providePixaBayApi() : PixaBayApi{
         return  Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
             .baseUrl(BASE_URL)
             .build()
-            .create(PixaBay::class.java)
+            .create(PixaBayApi::class.java)
     }
 
 }
